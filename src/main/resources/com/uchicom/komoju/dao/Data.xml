@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uchicom.labs.komoju.dao.DataMapper">
+	<insert id="insert" parameterType="Data" useGeneratedKeys="true" keyProperty="id">
+		insert into komoju.data
+		(
+		inserted,
+		insert_time,
+		disp_name,
+		simei,
+		password,
+		address,
+		tel,
+		mail,
+		sex,
+		birthday,
+		last_login,
+		lock_date,
+		role_id
+		)
+		values (
+		#{inserted},
+		current_timestamp(),
+		#{dispName},
+		#{simei},
+		#{password},
+		#{address},
+		#{tel},
+		#{mail},
+		#{sex},
+		#{birthday},
+		#{lastLogin},
+		#{lockDate},
+		#{roleId}
+		)
+	</insert>
+
+	<select id="select" resultType="Data" parameterType="Data">
+		SELECT
+		id as id,
+		inserted as inserted,
+		insert_time as insertTime,
+		disp_name as dispName,
+		simei as simei,
+		password as password,
+		address as
+		address,
+		tel as tel,
+		mail as mail,
+		sex as sex,
+		birthday as birthday,
+		last_login as lastLogin,
+		lock_date as lockDate,
+		role_id as roleId
+		FROM
+		share.user
+		<where>
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="mail != null">
+				AND mail = #{mail}
+			</if>
+			<if test="password != null">
+				AND password = #{password}
+			</if>
+		</where>
+	</select>
+</mapper>
